@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
+	id="WebApp_ID" version="3.1">
+	<display-name>tm</display-name>
+	<welcome-file-list>
+		<welcome-file>logion.html</welcome-file>
+		<welcome-file>login.htm</welcome-file>
+		<welcome-file>login.jsp</welcome-file>
+		<welcome-file>default.html</welcome-file>
+		<welcome-file>default.htm</welcome-file>
+		<welcome-file>default.jsp</welcome-file>
+	</welcome-file-list>
+
+	<listener>
+		<listener-class>com.bclw.listener.OnlineUserListener</listener-class>
+	</listener>
+
+	<!-- 页面编码过滤器 -->
+	<filter>
+		<filter-name>encodeFilter</filter-name>
+		<filter-class>com.bclw.filter.EncodeFilter</filter-class>
+		<init-param>
+			<param-name>encode</param-name>
+			<param-value>UTF-8</param-value>
+		</init-param>
+		<init-param>
+			<param-name>ignore</param-name>
+			<param-value>false</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>encodeFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+
+	<!-- 用户登录过滤器 -->
+	<filter>
+		<filter-name>loginFilter</filter-name>
+		<filter-class>com.bclw.filter.LoginFilter</filter-class>
+
+		<init-param>
+			<param-name>ignore</param-name>
+			<param-value>false</param-value>
+		</init-param>
+		<init-param>
+			<param-name>permitUrls</param-name>
+			<param-value>/servlet/LoginServlet,/index.jsp,/login.jsp,/dna.images,/erro/404.jsp</param-value>
+		</init-param>
+		<init-param>
+			<param-name>gotoUrl</param-name>
+			<param-value>/login.jsp</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>loginFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+
+	<!-- 用户登录servlet -->
+	<servlet>
+		<servlet-name>LoginServlet</servlet-name>
+		<!-- <display-name>Login</display-name> -->
+		<servlet-class>com.bclw.servlet.LoginServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>LoginServlet</servlet-name>
+		<url-pattern>/servlet/LoginServlet</url-pattern>
+	</servlet-mapping>
+
+	<!-- 验证码 -->
+	<servlet>
+		<servlet-name>validateCodeServlet</servlet-name>
+		<servlet-class>com.bclw.servlet.ValidateCodeServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>validateCodeServlet</servlet-name>
+		<url-pattern>*.images</url-pattern>
+	</servlet-mapping>
+
+	<!-- 教师servlet -->
+	<servlet>
+		<servlet-name>teacherServlet</servlet-name>
+		<servlet-class>com.bclw.servlet.TeacherServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>teacherServlet</servlet-name>
+		<url-pattern>/Teacher/servlet/teacherServlet</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>ValidateNameServlet</servlet-name>
+		<servlet-class>com.bclw.servlet.ValidateNameServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ValidateNameServlet</servlet-name>
+		<url-pattern>/servlet/ValidateNameServlet</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>standardServlet</servlet-name>
+		<servlet-class>com.bclw.servlet.standardServlet</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>AcayearServlet</servlet-name>
+		<servlet-class>com.bclw.servlet.AcayearServlet</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>TeacherManServlet</servlet-name>
+		<servlet-class>com.bclw.servlet.TeacherManServlet</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>profManServlet</servlet-name>
+		<servlet-class>com.bclw.servlet.profManServlet</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>classManServlet</servlet-name>
+		<servlet-class>com.bclw.servlet.classManServlet</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>courseManServlet</servlet-name>
+		<servlet-class>com.bclw.servlet.courseManServlet</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>sectionManServlet</servlet-name>
+		<servlet-class>com.bclw.servlet.sectionManServlet</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>courseArgServlet</servlet-name>
+		<servlet-class>com.bclw.servlet.courseArgServlet</servlet-class>
+	</servlet>
+  <servlet>
+    <servlet-name>UserExitServlet</servlet-name>
+    <servlet-class>com.bclw.servlet.UserExitServlet</servlet-class>
+  </servlet>
+
+
+
+
+
+
+	<servlet-mapping>
+		<servlet-name>standardServlet</servlet-name>
+		<url-pattern>/Admin/servlet/standardServlet</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>AcayearServlet</servlet-name>
+		<url-pattern>/Admin/servlet/AcayearServlet</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>TeacherManServlet</servlet-name>
+		<url-pattern>/Admin/servlet/TeacherManServlet</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>profManServlet</servlet-name>
+		<url-pattern>/Admin/servlet/profManServlet</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>classManServlet</servlet-name>
+		<url-pattern>/Admin/servlet/classManServlet</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>courseManServlet</servlet-name>
+		<url-pattern>/Admin/servlet/courseManServlet</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>sectionManServlet</servlet-name>
+		<url-pattern>/Admin/servlet/sectionManServlet</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>courseArgServlet</servlet-name>
+		<url-pattern>/Admin/servlet/courseArgServlet</url-pattern>
+	</servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>UserExitServlet</servlet-name>
+    <url-pattern>/servlet/UserExitServlet</url-pattern>
+  </servlet-mapping>
+
+</web-app>
